@@ -1,0 +1,948 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/6/2018 9:52:54 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DE-HQ-PC0191"
+  DTS:CreatorName="MOBISOL\gmartinez"
+  DTS:Description="SSIS Package Description"
+  DTS:DTSID="{C029564C-E831-4E08-B0F9-F96BD985AAD7}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3006.16"
+  DTS:LocaleID="1033"
+  DTS:MaxErrorCount="0"
+  DTS:ObjectName="Upload_Migration_Agg"
+  DTS:VersionGUID="{9AE60389-99D3-4B40-8C5E-D9C66E3EE462}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DestinationConnectionOLEDB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{0744C358-6E90-4198-86EC-CDC0C077D441}"
+      DTS:ObjectName="DestinationConnectionOLEDB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=mbslbiserver.database.windows.net;User ID=Reports;Initial Catalog=mbsldwh;Provider=SQLNCLI11;Auto Translate=false;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAS7STF/dDIEGCF+7EXFg3qAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAABfScIAVavqliOcY6DCkhxmAAAAAASAAACgAAAAEAAAAL9N3zuRf/hkwUnz3ASgLS8YAAAAO9b9864XU1+7u9soCABUZr6HZjVYnj8eFAAAADWmRGz0EDWDeR3Ax1lrDF/qzurY</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SourceConnectionOLEDB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{82F12119-B788-40F2-BF28-5AC79B4676B8}"
+      DTS:ObjectName="SourceConnectionOLEDB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=mbslbiserver.database.windows.net;User ID=Reports;Initial Catalog=mbsldwh_Dev;Provider=SQLNCLI11;Auto Translate=false;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAS7STF/dDIEGCF+7EXFg3qAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAABxP/bOyCOgrLBWG43do1c0AAAAAASAAACgAAAAEAAAAGa3xYnUcnq2RX6k5z+j7okYAAAAwknZS3ZM0h2e5dVXrEuXwABPiTm1VxCOFAAAAGO69nbQ1DfB/WFN7cq7K8DZ0atB</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task 1"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DTSID="{C6F764B3-A047-42B2-A0F6-2C494597E1B6}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:FailPackageOnFailure="True"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task 1"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          defaultBufferSize="3145728"
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task 1\Destination - Migration_agg"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Destination - Migration_agg"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Migration_agg]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task 1\Destination - Migration_agg.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DestinationConnectionOLEDB]"
+                  connectionManagerRefId="Package.ConnectionManagers[DestinationConnectionOLEDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].Columns[lfo_name]"
+                      cachedCodepage="1252"
+                      cachedDataType="text"
+                      cachedName="lfo_name"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[lfo_name]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[lfo_name]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].Columns[Currency]"
+                      cachedCodepage="1252"
+                      cachedDataType="text"
+                      cachedName="Currency"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Currency]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Currency]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].Columns[#]"
+                      cachedDataType="i8"
+                      cachedName="#"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[#]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[#]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].Columns[Bucket0]"
+                      cachedCodepage="1252"
+                      cachedDataType="text"
+                      cachedName="Bucket0"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Bucket0]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bucket0]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].Columns[Bucket1]"
+                      cachedCodepage="1252"
+                      cachedDataType="text"
+                      cachedName="Bucket1"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Bucket1]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bucket1]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].Columns[snapshot_at]"
+                      cachedCodepage="1252"
+                      cachedDataType="text"
+                      cachedName="snapshot_at"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[snapshot_at]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[snapshot_at]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].Columns[MonthEnd]"
+                      cachedCodepage="1252"
+                      cachedDataType="text"
+                      cachedName="MonthEnd"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[MonthEnd]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[MonthEnd]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].Columns[Bal0]"
+                      cachedDataType="r8"
+                      cachedName="Bal0"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Bal0]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal0]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].Columns[Bal1]"
+                      cachedDataType="r8"
+                      cachedName="Bal1"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Bal1]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal1]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].Columns[Bal&gt;30]"
+                      cachedDataType="r8"
+                      cachedName="Bal&gt;30"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Bal&gt;30]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal&gt;30]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].Columns[Bal&gt;1]"
+                      cachedDataType="r8"
+                      cachedName="Bal&gt;1"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Bal&gt;1]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal&gt;1]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].Columns[Balance]"
+                      cachedDataType="r8"
+                      cachedName="Balance"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Balance]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Balance]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].Columns[Bal1-30]"
+                      cachedDataType="r8"
+                      cachedName="Bal1-30"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Bal1-30]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal1-30]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].Columns[Bal30]"
+                      cachedDataType="r8"
+                      cachedName="Bal30"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Bal30]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal30]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].Columns[Bal0PaR1]"
+                      cachedDataType="r8"
+                      cachedName="Bal0PaR1"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Bal0PaR1]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal0PaR1]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].Columns[Bal1_1PIGP]"
+                      cachedDataType="r8"
+                      cachedName="Bal1_1PIGP"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Bal1_1PIGP]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal1_1PIGP]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].Columns[Bal0PaR30]"
+                      cachedDataType="r8"
+                      cachedName="Bal0PaR30"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Bal0PaR30]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal0PaR30]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].Columns[Bal1_30PIGP]"
+                      cachedDataType="r8"
+                      cachedName="Bal1_30PIGP"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Bal1_30PIGP]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal1_30PIGP]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].Columns[Bal0PaR60]"
+                      cachedDataType="r8"
+                      cachedName="Bal0PaR60"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Bal0PaR60]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal0PaR60]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].Columns[Bal1_60PIGP]"
+                      cachedDataType="r8"
+                      cachedName="Bal1_60PIGP"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Bal1_60PIGP]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal1_60PIGP]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].Columns[Nb_Months]"
+                      cachedDataType="i8"
+                      cachedName="Nb_Months"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Nb_Months]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Nb_Months]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].Columns[Supervisor]"
+                      cachedCodepage="1252"
+                      cachedDataType="text"
+                      cachedName="Supervisor"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Supervisor]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Supervisor]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[lfo_name]"
+                      codePage="1252"
+                      dataType="text"
+                      name="lfo_name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Currency]"
+                      codePage="1252"
+                      dataType="text"
+                      name="Currency" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[#]"
+                      dataType="i8"
+                      name="#" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Bucket0]"
+                      codePage="1252"
+                      dataType="text"
+                      name="Bucket0" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Bucket1]"
+                      codePage="1252"
+                      dataType="text"
+                      name="Bucket1" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[snapshot_at]"
+                      codePage="1252"
+                      dataType="text"
+                      name="snapshot_at" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[MonthEnd]"
+                      codePage="1252"
+                      dataType="text"
+                      name="MonthEnd" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Bal0]"
+                      dataType="r8"
+                      name="Bal0" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Bal1]"
+                      dataType="r8"
+                      name="Bal1" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Bal&gt;30]"
+                      dataType="r8"
+                      name="Bal&gt;30" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Bal&gt;1]"
+                      dataType="r8"
+                      name="Bal&gt;1" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Balance]"
+                      dataType="r8"
+                      name="Balance" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Bal1-30]"
+                      dataType="r8"
+                      name="Bal1-30" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Bal30]"
+                      dataType="r8"
+                      name="Bal30" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Bal0PaR1]"
+                      dataType="r8"
+                      name="Bal0PaR1" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Bal1_1PIGP]"
+                      dataType="r8"
+                      name="Bal1_1PIGP" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Bal0PaR30]"
+                      dataType="r8"
+                      name="Bal0PaR30" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Bal1_30PIGP]"
+                      dataType="r8"
+                      name="Bal1_30PIGP" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Bal0PaR60]"
+                      dataType="r8"
+                      name="Bal0PaR60" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Bal1_60PIGP]"
+                      dataType="r8"
+                      name="Bal1_60PIGP" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Nb_Months]"
+                      dataType="i8"
+                      name="Nb_Months" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input].ExternalColumns[Supervisor]"
+                      codePage="1252"
+                      dataType="text"
+                      name="Supervisor" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task 1\Destination - Migration_agg.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task 1\Destination - Migration_agg.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Destination - Migration_agg.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task 1\Destination - Migration_agg.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task 1\Source - Migration_agg"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Source - Migration_agg"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Migration_agg]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task 1\Source - Migration_agg.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SourceConnectionOLEDB]"
+                  connectionManagerRefId="Package.ConnectionManagers[SourceConnectionOLEDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[lfo_name]"
+                      codePage="1252"
+                      dataType="text"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[lfo_name]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[lfo_name]"
+                      name="lfo_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Currency]"
+                      codePage="1252"
+                      dataType="text"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Currency]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Currency]"
+                      name="Currency"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[#]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[#]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[#]"
+                      name="#"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bucket0]"
+                      codePage="1252"
+                      dataType="text"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Bucket0]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bucket0]"
+                      name="Bucket0"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bucket1]"
+                      codePage="1252"
+                      dataType="text"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Bucket1]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bucket1]"
+                      name="Bucket1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[snapshot_at]"
+                      codePage="1252"
+                      dataType="text"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[snapshot_at]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[snapshot_at]"
+                      name="snapshot_at"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[MonthEnd]"
+                      codePage="1252"
+                      dataType="text"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[MonthEnd]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[MonthEnd]"
+                      name="MonthEnd"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal0]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Bal0]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal0]"
+                      name="Bal0"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal1]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Bal1]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal1]"
+                      name="Bal1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal&gt;30]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Bal&gt;30]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal&gt;30]"
+                      name="Bal&gt;30"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal&gt;1]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Bal&gt;1]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal&gt;1]"
+                      name="Bal&gt;1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Balance]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Balance]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Balance]"
+                      name="Balance"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal1-30]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Bal1-30]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal1-30]"
+                      name="Bal1-30"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal30]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Bal30]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal30]"
+                      name="Bal30"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal0PaR1]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Bal0PaR1]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal0PaR1]"
+                      name="Bal0PaR1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal1_1PIGP]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Bal1_1PIGP]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal1_1PIGP]"
+                      name="Bal1_1PIGP"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal0PaR30]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Bal0PaR30]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal0PaR30]"
+                      name="Bal0PaR30"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal1_30PIGP]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Bal1_30PIGP]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal1_30PIGP]"
+                      name="Bal1_30PIGP"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal0PaR60]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Bal0PaR60]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal0PaR60]"
+                      name="Bal0PaR60"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal1_60PIGP]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Bal1_60PIGP]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Bal1_60PIGP]"
+                      name="Bal1_60PIGP"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Nb_Months]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Nb_Months]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Nb_Months]"
+                      name="Nb_Months"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Supervisor]"
+                      codePage="1252"
+                      dataType="text"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Supervisor]"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].Columns[Supervisor]"
+                      name="Supervisor"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[lfo_name]"
+                      codePage="1252"
+                      dataType="text"
+                      name="lfo_name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Currency]"
+                      codePage="1252"
+                      dataType="text"
+                      name="Currency" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[#]"
+                      dataType="i8"
+                      name="#" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Bucket0]"
+                      codePage="1252"
+                      dataType="text"
+                      name="Bucket0" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Bucket1]"
+                      codePage="1252"
+                      dataType="text"
+                      name="Bucket1" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[snapshot_at]"
+                      codePage="1252"
+                      dataType="text"
+                      name="snapshot_at" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[MonthEnd]"
+                      codePage="1252"
+                      dataType="text"
+                      name="MonthEnd" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Bal0]"
+                      dataType="r8"
+                      name="Bal0" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Bal1]"
+                      dataType="r8"
+                      name="Bal1" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Bal&gt;30]"
+                      dataType="r8"
+                      name="Bal&gt;30" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Bal&gt;1]"
+                      dataType="r8"
+                      name="Bal&gt;1" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Balance]"
+                      dataType="r8"
+                      name="Balance" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Bal1-30]"
+                      dataType="r8"
+                      name="Bal1-30" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Bal30]"
+                      dataType="r8"
+                      name="Bal30" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Bal0PaR1]"
+                      dataType="r8"
+                      name="Bal0PaR1" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Bal1_1PIGP]"
+                      dataType="r8"
+                      name="Bal1_1PIGP" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Bal0PaR30]"
+                      dataType="r8"
+                      name="Bal0PaR30" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Bal1_30PIGP]"
+                      dataType="r8"
+                      name="Bal1_30PIGP" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Bal0PaR60]"
+                      dataType="r8"
+                      name="Bal0PaR60" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Bal1_60PIGP]"
+                      dataType="r8"
+                      name="Bal1_60PIGP" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Nb_Months]"
+                      dataType="i8"
+                      name="Nb_Months" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output].ExternalColumns[Supervisor]"
+                      codePage="1252"
+                      dataType="text"
+                      name="Supervisor" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[lfo_name]"
+                      codePage="1252"
+                      dataType="text"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[lfo_name]"
+                      name="lfo_name" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Currency]"
+                      codePage="1252"
+                      dataType="text"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Currency]"
+                      name="Currency" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[#]"
+                      dataType="i8"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[#]"
+                      name="#" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Bucket0]"
+                      codePage="1252"
+                      dataType="text"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Bucket0]"
+                      name="Bucket0" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Bucket1]"
+                      codePage="1252"
+                      dataType="text"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Bucket1]"
+                      name="Bucket1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[snapshot_at]"
+                      codePage="1252"
+                      dataType="text"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[snapshot_at]"
+                      name="snapshot_at" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[MonthEnd]"
+                      codePage="1252"
+                      dataType="text"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[MonthEnd]"
+                      name="MonthEnd" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Bal0]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Bal0]"
+                      name="Bal0" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Bal1]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Bal1]"
+                      name="Bal1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Bal&gt;30]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Bal&gt;30]"
+                      name="Bal&gt;30" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Bal&gt;1]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Bal&gt;1]"
+                      name="Bal&gt;1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Balance]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Balance]"
+                      name="Balance" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Bal1-30]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Bal1-30]"
+                      name="Bal1-30" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Bal30]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Bal30]"
+                      name="Bal30" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Bal0PaR1]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Bal0PaR1]"
+                      name="Bal0PaR1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Bal1_1PIGP]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Bal1_1PIGP]"
+                      name="Bal1_1PIGP" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Bal0PaR30]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Bal0PaR30]"
+                      name="Bal0PaR30" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Bal1_30PIGP]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Bal1_30PIGP]"
+                      name="Bal1_30PIGP" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Bal0PaR60]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Bal0PaR60]"
+                      name="Bal0PaR60" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Bal1_60PIGP]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Bal1_60PIGP]"
+                      name="Bal1_60PIGP" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Nb_Months]"
+                      dataType="i8"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Nb_Months]"
+                      name="Nb_Months" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Supervisor]"
+                      codePage="1252"
+                      dataType="text"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[Supervisor]"
+                      name="Supervisor" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task 1.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task 1\Destination - Migration_agg.Inputs[Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task 1\Source - Migration_agg.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Preparation SQL Task 1"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{17EE1583-198D-4215-AC41-54D17C5CC976}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:FailPackageOnFailure="True"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Preparation SQL Task 1"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{0744C358-6E90-4198-86EC-CDC0C077D441}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE [dbo].[Migration_agg]&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[{1A3C3234-5AD5-4F3D-B3E7-BFB7EC5EB48B\}]"
+      DTS:CreationName=""
+      DTS:DTSID="{1A3C3234-5AD5-4F3D-B3E7-BFB7EC5EB48B}"
+      DTS:From="Package\Preparation SQL Task 1"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="{1A3C3234-5AD5-4F3D-B3E7-BFB7EC5EB48B}"
+      DTS:To="Package\Data Flow Task 1" />
+  </DTS:PrecedenceConstraints>
+</DTS:Executable>
