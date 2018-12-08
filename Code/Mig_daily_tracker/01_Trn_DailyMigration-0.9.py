@@ -5,13 +5,14 @@ from sqlalchemy import delete
 from datetime import datetime
 import time
 import urllib
-import ctds
 
 #AZURE SQL SERVER CONNECTION
 params = urllib.quote_plus("DRIVER={ODBC Driver 17 for SQL Server};SERVER=mbslbiserver.database.windows.net;DATABASE=mbsldwh_dev;UID=Reports;PWD=mbsl1234!")
 engineAzure = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-df_Migration_Agg = pd.read_sql_query("""SELECT * FROM Migration_Agg """,   engineAzure )
-
-conn = ctds.connect('mbslbiserver.database.windows.net', user='Reports', password='mbsl1234!', database='mbsldwh_dev')
-conn.bulk_insert('Migration_Agg', (df.to_records(index=False).tolist()))
+engineAzure.execute("""
+--to create dailyconsolidated table
+delete from t_daily_consolidated where snapshot_at=(select snapshot_at from [Extr_Dailysnapshot] group by snapshot_at)
+insert into t_daily_consolidated select * from [Extr_Dailysnapshot]
+ """
+    )

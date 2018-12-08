@@ -8,7 +8,7 @@ declare @query as nvarchar(max)
 declare @Select as nvarchar(max)
 declare @folder as nvarchar(500)
 
-set @folder='C:\Users\gmartinez\Documents\Docs\coding\Migration daily tracker\Temp files for POR Oct\'
+set @folder='C:\Users\gmartinez\Documents\Docs\coding\Files\MigrationFiles\'
 set @Select='  *'
 /*
 
@@ -30,7 +30,7 @@ set @query=' select * into temp_dec
  from openrowset(
 ''MSDASQL'',
 ''Driver={Microsoft Access Text Driver (*.txt, *.csv)}; DBQ=' + @folder + ''',
-'' select ' + @select + ' from "2018-12-04.csv"'') T'
+'' select ' + @select + ' from "SnapshotDec7.csv"'') T'
 
 
 exec(@query)
