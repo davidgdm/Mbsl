@@ -27,6 +27,7 @@ cnxn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};'
 
 cursor = cnxn.cursor()
 #cursor.execute("""delete from t_daily_consolidated where snapshot_at=(select snapshot_at from [Extr_Dailysnapshot] group by snapshot_at);""")
-querystring ="""select top 10 * into prueba from migration_agg;"""
+querystring ="""delete from t_daily_consolidated where snapshot_at=(select snapshot_at from [Extr_Dailysnapshot] group by snapshot_at);
+insert into t_daily_consolidated select * from [Extr_Dailysnapshot_dec7];"""
 cursor.execute(querystring)
 cnxn.commit()
