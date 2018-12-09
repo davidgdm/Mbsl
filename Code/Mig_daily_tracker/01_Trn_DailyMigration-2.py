@@ -126,5 +126,5 @@ cnxn_dev.commit()
 
 #Uploading last day into DWH
 df_Migration = pd.read_sql_query("""select * from Migration_agg where snapshot_at =(select max(snapshot_at)from Migration_agg)""", con=cnxn_dev)
-df_Migration.to_sql('Migration_Agg',engineDWH, if_exists='append',index=False)
+df_Migration.to_sql('Migration_agg',engineDWH, if_exists='append',index=False)
 
