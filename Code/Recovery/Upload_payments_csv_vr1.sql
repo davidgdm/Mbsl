@@ -1,7 +1,7 @@
 use mbsol
 
-if object_id('extr_workcases') is not null
-	drop table extr_workcases
+if object_id('extr_payments') is not null
+	drop table extr_payments
 go
 
 declare @query as nvarchar(max)
@@ -26,11 +26,11 @@ set @query=' insert into temp_nov_data ( [currency]
 '' select ' + @select + ' from "28_11_2018.csv"'') T'
 --print (@query)
 */
-set @query=' select * into extr_workcases
+set @query=' select * into extr_payments
  from openrowset(
 ''MSDASQL'',
 ''Driver={Microsoft Access Text Driver (*.txt, *.csv)}; DBQ=' + @folder + ''',
-'' select ' + @select + ' from "workcases_Dec1-Dec10.csv"'') T'
+'' select ' + @select + ' from "payments_dec1-dec10.csv"'') T'
 
 
 exec(@query)

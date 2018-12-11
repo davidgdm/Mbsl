@@ -18,8 +18,9 @@ inner join payment_accounts pa on pa.loan_portfolio_id=lp.id
 inner join payments p on p.payment_account_id=pa.id
 inner join users u on lwc.user_id = u.id
 inner join hubs on c.hub_id=hubs.id
-where lwc.could_reach_customer=1 and lwc.activity_category_id IN ("5252","5253") and lwc.closed_at >= "2018-11-01" 
-group by lwc.id ;""", con=conSolar)
+where lwc.could_reach_customer=1 and lwc.activity_category_id IN ("5252","5253") and lwc.closed_at >= "2018-12-10" 
+group by lwc.id 
+limit 10;""", con=conSolar)
 
 
 
@@ -29,7 +30,7 @@ conn = connect(driver='{ODBC Driver 17 for SQL Server}', server='mbslbiserver.da
 test_query = '''DELETE FROM EXTR_WORKCASES
 
 
-                INSERT INTO Extr_workcases ([Country]      ,[LWCid]      ,[Action_by]      ,[CustomerID]      ,[LoanPortfolioID]      ,[closed_at]      ,[activity_category_id])
+                INSERT INTO Extr_workcases ([Country],[LWCid]      ,[Action_by]      ,[CustomerID]      ,[LoanPortfolioID]      ,[closed_at]      ,[activity_category_id])
                 VALUES (?,?,?,?,?,?,?) '''
 
 cursor.executemanycolumns(test_query, [df_workcases['Country'].values, df_workcases['LWCid'].values, df_workcases['Action_by'].values, df_workcases['CustomerID'].values, df_workcases['activity_category_id'].values, df_workcases['closed_at'].values, df_workcases['closed_at'].values])

@@ -6,7 +6,7 @@ from datetime import datetime
 import time
 import urllib
 import pypyodbc
-import pymssql
+import pyodbc
 
 conSolar = sql.connect(user='david',password='ItJubSheg6',host='kaa.plugintheworld.com',database='solarhub_production')
 #Retrieving data from SOLARhub
@@ -24,16 +24,20 @@ inner join hubs on c.hub_id=hubs.id
 where lwc.could_reach_customer=1 and lwc.activity_category_id IN ("5252","5253") and lwc.closed_at >= "2018-12-01" 
 group by lwc.id limit 10;""", con=conSolar)
 
+cnxn_dev = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};'
+                      'Server=mbslbiserver.database.windows.net;'
+                      'Database=mbsldwh_dev;'
+                      'UID=Reports;'
+                      'PWD=mbsl1234!')
 
-#AZURE SQL SERVER CONNECTION
-#params = urllib.quote_plus("DRIVER={ODBC Driver 17 for SQL Server};SERVER=mbslbiserver.database.windows.net;DATABASE=mbsldwh_dev;UID=Reports;PWD=mbsl1234!;autocommit=False")
-params = urllib.quote_plus("DRIVER={ODBC Driver 17 for SQL Server};SERVER=DE-HQ-PC0191;DATABASE=Mbsol;UID=sa;PWD=Admin1234.,")
-engineAzure = create_engine("mssql+pymsql:///?odbc_connect=%s" % params)
+cursor = cnxn_dev.cursor()
+#Performing all transformations
+querystring ="""
+DELETE FROM EXTR_WORKCASES
 
-#cnxn = pypyodbc.connect("Driver={SQL Server Native Client 11.0};"
-#                        "Server=mbslbiserver.database.windows.net;"
-#                        "Database=mbsldwh_dev;"
-#                        "uid=Reports;pwd=mbsl1234!")
-#df = pd.read_sql_query('select * from table', cnxn)
 
-df_workcases.to_sql('Extr_workcases',engineAzure,if_exists='replace',index=False)
+                INSERT INTO Extr_workcases ([Country]      ,[LWCid]      ,[Action_by]      ,[CustomerID]      ,[LoanPortfolioID]      ,[closed_at]      ,[activity_category_id])
+                VALUES (?,?,?,?,?,?,?)
+    """
+cursor.executemany(querystring, [df_workcases['Country'].values, df_workcases['LWCid'].values, df_workcases['Action_by'].values, df_workcases['CustomerID'].values, df_workcases['LoanPortfolioID'].values, df_workcases['closed_at'].values, df_workcases['activity_category_id'].values])
+cnxn_dev.commit()
