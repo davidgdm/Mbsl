@@ -42,7 +42,7 @@ df_dailysnapshot = pd.read_sql_query("""SELECT la.id as loan_account_id,
     WHERE la.risk_category IS NOT NULL
     AND la.state NOT IN('paid_off', 'defaulted', 'canceled')
     GROUP BY la.id
-    ORDER BY la.id limit 10;""", con=conSolar)
+    ORDER BY la.id limit 11;""", con=conSolar)
 
-#df_dailysnapshot.to_csv('/home/dwh/ETL/mbsl/Code/Test/daily.csv')
-df_dailysnapshot.to_csv('C:/testETL/daily.csv')
+df_dailysnapshot.to_csv('/home/dwh/ETL/mbsl/Code/Test/daily.csv', index=False)
+#df_dailysnapshot.to_csv('C:/testETL/daily.csv', index=False)
