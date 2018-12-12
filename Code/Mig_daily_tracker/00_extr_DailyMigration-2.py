@@ -10,11 +10,12 @@ import time
 import pymssql
 import os
 
-#os.system("systemctl --mobisol_data_warehouse restart db-ssh.service")
-
+os.system("sudo systemctl restart db-ssh")
+print("service restarted")
+time.sleep(2)
+print("2 sec waited")
 conSolar = sql.connect(user='mobisol_data_warehouse',password='mydLalm8EjimLojOd3',host='127.0.1.1',database='solarhub_production',port='3306')
 print('connection established')
-
 #extraction of WC
 df_dailysnapshot = pd.read_sql_query("""SELECT la.id as loan_account_id,
 	la.loan_portfolio_id,
