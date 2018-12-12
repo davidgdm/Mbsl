@@ -195,11 +195,11 @@ cnxn_prod = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};'
                       'PWD=mbsl1234!')
 
 cursorp=cnxn_prod.cursor()
-querystring="""select max(snapshot_at) from Temp_Migration_agg;
+querystring="""
 delete from [dbo].[Migration_agg]where [snapshot_at]=(select max(snapshot_at) from Temp_Migration_agg);
 insert into [Migration_agg] select * from Temp_Migration_agg;
 if object_id('Temp_Migration_agg') is not null
-	--drop table Temp_Migration_agg
+	drop table Temp_Migration_agg
 """
 cursorp.execute(querystring)
 cnxn_prod.commit()
