@@ -17,7 +17,7 @@ time.sleep(2)
 print("2 sec waited")
 conSolar = sql.connect(user='mobisol_data_warehouse',password='mydLalm8EjimLojOd3',host='127.0.1.1',database='solarhub_production',port='3306')
 print('connection established')
-#extraction of WC
+#extraction of daily snapshot
 df_dailysnapshot = pd.read_sql_query("""SELECT la.id as loan_account_id,
 	la.loan_portfolio_id,
     la.currency,
@@ -50,7 +50,7 @@ df_dailysnapshot = pd.read_sql_query("""SELECT la.id as loan_account_id,
     ORDER BY la.id;""", con=conSolar)
 print ('df created')
 
-df_dailysnapshot.to_csv('/home/dwh/ETL/mbsl/Code/Test/daily.csv', index=False)
+df_dailysnapshot.to_csv('/home/dwh/ETL/mbsl/Code/daily.csv', index=False)
 #df_dailysnapshot.to_csv('C:/testETL/daily.csv', index=False)
 print('csv saved')
 
@@ -65,7 +65,7 @@ cursor.execute(querystring)
 cnxn_dev.commit()
 print('truncate Extr_Dailysnapshot finished')
 
-os.system("""bcp Extr_Dailysnapshot in "/home/dwh/ETL/mbsl/Code/Test/daily.csv" -S mbslbiserver.database.windows.net -d mbsldwh_dev -U Reports -P mbsl1234! -q -c -t ,""")
+os.system("""bcp Extr_Dailysnapshot in "/home/dwh/ETL/mbsl/Code/daily.csv" -S mbslbiserver.database.windows.net -d mbsldwh_dev -U Reports -P mbsl1234! -q -c -t ,""")
 
 #------------------------TRANSFORMATION---------------------------------
 print('transformation started')
