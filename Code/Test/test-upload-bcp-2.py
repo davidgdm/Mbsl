@@ -10,7 +10,7 @@ import time
 import pymssql
 import os
 
-os.system("systemctl --user restart db-ssh.service")
+#os.system("systemctl --mobisol_data_warehouse restart db-ssh.service")
 
 conSolar = sql.connect(user='mobisol_data_warehouse',password='mydLalm8EjimLojOd3',host='127.0.1.1',database='solarhub_production',port='3306')
 
