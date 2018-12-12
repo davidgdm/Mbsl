@@ -45,7 +45,7 @@ df_dailysnapshot = pd.read_sql_query("""SELECT la.id as loan_account_id,
     WHERE la.risk_category IS NOT NULL
     AND la.state NOT IN('paid_off', 'defaulted', 'canceled')
     GROUP BY la.id
-    ORDER BY la.id limit 50;""", con=conSolar)
+    ORDER BY la.id;""", con=conSolar)
 
 print ('df created')
 
