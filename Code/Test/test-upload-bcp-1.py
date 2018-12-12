@@ -44,5 +44,5 @@ df_dailysnapshot = pd.read_sql_query("""SELECT la.id as loan_account_id,
     GROUP BY la.id
     ORDER BY la.id limit 10;""", con=conSolar)
 
-df_dailysnapshot.to_csv('/home/dwh/ETL/mbsl/Code/Test/daily.csv')
-#df_dailysnapshot.to_csv('c:/daily.csv')
+#df_dailysnapshot.to_csv('/home/dwh/ETL/mbsl/Code/Test/daily.csv')
+df_dailysnapshot.to_csv('C:/testETL/daily.csv')

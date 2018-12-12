@@ -1,0 +1,11 @@
+,loan_account_id,loan_portfolio_id,currency,lfo_name,state,risk_category,par_days,handover_at,outstanding_amount,snapshot_at
+0,50,48,TZS,Siprian Mwanga,repossess_assets,PAR60,0.0,2011-12-19 12:49:24,897600.0,2018-12-11
+1,230,254,TZS,Daniel Elirehema,exceeded_loan_period,PAR60,368.564,2013-02-01 15:04:00,413793.0,2018-12-11
+2,366,434,TZS,Prosper Mfoi,exceeded_loan_period,PAR60,1128.22,2013-03-15 09:01:00,354500.0,2018-12-11
+3,394,471,TZS,Siprian Mwanga,exceeded_loan_period,PAR60,1082.4,2013-04-15 18:12:00,530400.0,2018-12-11
+4,414,506,TZS,Prosper Mfoi,exceeded_loan_period,PAR60,1009.32,2013-04-17 01:56:00,623302.0,2018-12-11
+5,485,623,TZS,Baltazar Mngongo,exceeded_loan_period,PAR60,953.024,2013-05-02 10:00:00,68500.0,2018-12-11
+6,497,476,TZS,Prosper Mfoi,exceeded_loan_period,PAR60,846.26,2013-05-03 10:00:00,30447.0,2018-12-11
+7,530,285,TZS,Siprian Mwanga,exceeded_loan_period,PAR60,1026.41,2013-05-08 10:00:00,99000.0,2018-12-11
+8,588,281,TZS,Siprian Mwanga,exceeded_loan_period,PAR60,1109.97,2013-05-20 10:00:00,146000.0,2018-12-11
+9,599,622,TZS,Siprian Mwanga,exceeded_loan_period,PAR60,1088.93,2013-05-22 10:00:00,130000.0,2018-12-11
