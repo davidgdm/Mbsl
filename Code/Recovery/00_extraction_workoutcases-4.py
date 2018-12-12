@@ -47,4 +47,4 @@ cursor.execute(querystring)
 cnxn_dev.commit()
 print('truncate Extr_workcases finished')
 
-os.system("""bcp Extr_Dailysnapshot in "/home/dwh/ETL/mbsl/Code/wc.csv" -S mbslbiserver.database.windows.net -d mbsldwh_dev -U Reports -P mbsl1234! -q -c -t ,""")
+os.system("""bcp Extr_workcases in "/home/dwh/ETL/mbsl/Code/wc.csv" -S mbslbiserver.database.windows.net -d mbsldwh_dev -U Reports -P mbsl1234! -q -c -t ,""")
