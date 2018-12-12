@@ -5,7 +5,6 @@ from sqlalchemy import delete
 from datetime import datetime
 import time
 import urllib
-import pypyodbc
 import pyodbc
 import time
 import pymssql
