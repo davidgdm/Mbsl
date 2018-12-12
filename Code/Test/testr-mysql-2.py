@@ -7,7 +7,7 @@ import time
 import urllib
 import os
 
-os.system("bcp Extr_Dailysnapshot in "/home/dwh/ETL/mbsl/Code/Test/daily.csv" -S mbslbiserver.database.windows.net -d mbsldwh_dev -U Reports -P mbsl1234! -q -c -t ,'")
+os.system("""bcp Extr_Dailysnapshot in "/home/dwh/ETL/mbsl/Code/Test/daily.csv" -S mbslbiserver.database.windows.net -d mbsldwh_dev -U Reports -P mbsl1234! -q -c -t ,'""")
 
 
 #conSolar = sql.connect(user='david',password='ItJubSheg6',host='kaa.plugintheworld.com',database='solarhub_production', port='3306')
