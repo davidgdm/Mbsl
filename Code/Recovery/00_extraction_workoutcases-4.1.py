@@ -28,7 +28,7 @@ group by pa.loan_portfolio_id, convert(p.transaction_at,date);""", con=conSolar,
 
 print('payments MySQl query finished')
 
-df_payments.to_csv('/home/dwh/ETL/mbsl/Code/payments.csv', index=False)
+df_payments.to_csv('/home/dwh/ETL/mbsl/Code/payments.csv', index=False, chunksize=10000)
 print('csv payments saved')
 
 cnxn_dev = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};'
