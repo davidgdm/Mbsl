@@ -3,6 +3,7 @@ import mysql.connector as sql
 from sqlalchemy import create_engine, text
 from sqlalchemy import delete
 from datetime import datetime
+import datetime
 import time
 import urllib
 import pyodbc
@@ -12,15 +13,18 @@ import os
 
 
 #------------------------EXTRACTION---------------------------------
-os.system("sudo systemctl restart db-ssh")
+#os.system("sudo systemctl restart db-ssh")
 print("service restarted")
 time.sleep(2)
 print("2 sec waited")
-conSolar = sql.connect(user='mobisol_data_warehouse',password='mydLalm8EjimLojOd3',host='127.0.1.1',database='solarhub_production',port='3306')
+#conSolar = sql.connect(user='mobisol_data_warehouse',password='mydLalm8EjimLojOd3',host='127.0.1.1',database='solarhub_production',port='3306')
+conSolar = sql.connect(user='david',password='ItJubSheg6',host='kaa.plugintheworld.com',database='solarhub_production')
 print('connection established')
 
-#extraction of workcases
-df_workcases = pd.read_sql_query("""select left(hubs.hub_name,2) as Country,lwc.id as LWCid,u.name as 'Action_by',c.id as CustomerID, lp.id as LoanPortfolioID, lwc.closed_at, 
+closed_at = datetime.date(2018, 12, 12)
+closed_at = repr(str(closed_at))
+
+query = text("""select left(hubs.hub_name,2) as Country,lwc.id as LWCid,u.name as 'Action_by',c.id as CustomerID, lp.id as LoanPortfolioID, lwc.closed_at, 
     lwc.activity_category_id
     from loan_workout_cases lwc
     inner join customers c on c.id=lwc.customer_id
@@ -29,9 +33,14 @@ df_workcases = pd.read_sql_query("""select left(hubs.hub_name,2) as Country,lwc.
     inner join payments p on p.payment_account_id=pa.id
     inner join users u on lwc.user_id = u.id
     inner join hubs on c.hub_id=hubs.id
-    where lwc.could_reach_customer=1 and lwc.activity_category_id IN ("5252","5253") and lwc.closed_at >= "2018-12-01"
-    group by lwc.id;""", con=conSolar)
-print ('df created')
+    where lwc.could_reach_customer=1 and lwc.activity_category_id IN ("5252","5253") and lwc.closed_at >= %s
+    group by lwc.id;""")
+
+df_workcases=pd.read_sql_query(query, con=conSolar, params=( closed_at))
+
+
+
+
 
 df_workcases.to_csv('/home/dwh/ETL/mbsl/Code/wc.csv', index=False)
 print('csv saved')
