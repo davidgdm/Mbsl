@@ -31,7 +31,8 @@ inner join payment_accounts pa on pa.loan_portfolio_id=lp.id
 inner join payments p on p.payment_account_id=pa.id
 inner join users u on lwc.user_id = u.id
 inner join hubs on c.hub_id=hubs.id
-where lwc.could_reach_customer=1 and lwc.activity_category_id IN ("5252","5253") and lwc.closed_at >= ( CURDATE() - INTERVAL 3 DAY )
+where lwc.could_reach_customer=1 and lwc.activity_category_id IN ("5252","5253") and lwc.closed_at 
+#>= ( CURDATE() - INTERVAL 3 DAY )
 group by lwc.id;""", con=conSolar)
 
 
