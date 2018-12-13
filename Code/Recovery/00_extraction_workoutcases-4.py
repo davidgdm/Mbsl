@@ -13,7 +13,7 @@ import os
 
 
 #------------------------EXTRACTION---------------------------------
-#os.system("sudo systemctl restart db-ssh")
+os.system("sudo systemctl restart db-ssh")
 print("service restarted")
 time.sleep(2)
 print("2 sec waited")
