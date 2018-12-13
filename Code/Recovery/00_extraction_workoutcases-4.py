@@ -21,28 +21,22 @@ print("2 sec waited")
 conSolar = sql.connect(user='david',password='ItJubSheg6',host='kaa.plugintheworld.com',database='solarhub_production')
 print('connection established')
 
-closed_at = datetime.date(2018, 12, 12)
-closed_at = repr(str(closed_at))
-
-query = text("""select left(hubs.hub_name,2) as Country,lwc.id as LWCid,u.name as 'Action_by',c.id as CustomerID, lp.id as LoanPortfolioID, lwc.closed_at, 
-    lwc.activity_category_id
-    from loan_workout_cases lwc
-    inner join customers c on c.id=lwc.customer_id
-    inner join loan_portfolios lp on lp.customer_id=c.id
-    inner join payment_accounts pa on pa.loan_portfolio_id=lp.id
-    inner join payments p on p.payment_account_id=pa.id
-    inner join users u on lwc.user_id = u.id
-    inner join hubs on c.hub_id=hubs.id
-    where lwc.could_reach_customer=1 and lwc.activity_category_id IN ("5252","5253") and lwc.closed_at >= %s
-    group by lwc.id;""")
-
-df_workcases=pd.read_sql_query(query, con=conSolar, params=( closed_at))
-
-
-
+#WC extraction last 3 days
+df_workcases = pd.read_sql_query("""select left(hubs.hub_name,2) as Country,lwc.id as LWCid,u.name as 'Action_by',c.id as CustomerID, lp.id as LoanPortfolioID, lwc.closed_at, 
+lwc.activity_category_id
+from loan_workout_cases lwc
+inner join customers c on c.id=lwc.customer_id
+inner join loan_portfolios lp on lp.customer_id=c.id
+inner join payment_accounts pa on pa.loan_portfolio_id=lp.id
+inner join payments p on p.payment_account_id=pa.id
+inner join users u on lwc.user_id = u.id
+inner join hubs on c.hub_id=hubs.id
+where lwc.could_reach_customer=1 and lwc.activity_category_id IN ("5252","5253") and lwc.closed_at >= ( CURDATE() - INTERVAL 3 DAY )
+group by lwc.id;""", con=conSolar)
 
 
 df_workcases.to_csv('/home/dwh/ETL/mbsl/Code/wc.csv', index=False)
+
 print('csv saved')
 
 cnxn_dev = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};'
