@@ -46,10 +46,14 @@ querystring ="""truncate table Extr_workcases;"""
 cursor.execute(querystring)
 cnxn_dev.commit()
 print('truncate Extr_workcases finished')
-
 os.system("""bcp Extr_workcases in "/home/dwh/ETL/mbsl/Code/wc.csv" -S mbslbiserver.database.windows.net -d mbsldwh_dev -U Reports -P mbsl1234! -q -c -t ,""")
 
 #payments extraction 
+os.system("sudo systemctl restart db-ssh")
+print("service restarted")
+time.sleep(2)
+print("2 sec waited")
+conSolar = sql.connect(user='mobisol_data_warehouse',password='mydLalm8EjimLojOd3',host='127.0.1.1',database='solarhub_production',port='3306')
 print('payments MySQl query started')
 df_payments = pd.read_sql_query("""SELECT pa.loan_portfolio_id, convert(p.transaction_at,date) as transaction_at, sum(p.amount_subunit)/100 as "Payment_Amount"
 FROM payments p inner join payment_accounts pa on p.payment_account_id=pa.id
