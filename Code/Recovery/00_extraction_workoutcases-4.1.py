@@ -23,7 +23,7 @@ df_payments = pd.read_sql_query("""SELECT pa.loan_portfolio_id, convert(p.transa
 FROM payments p inner join payment_accounts pa on p.payment_account_id=pa.id
 where convert(transaction_at,date)>=2018-12-12
 and  pa.loan_portfolio_id is not null
-group by pa.loan_portfolio_id, convert(p.transaction_at,date);""", con=conSolar)
+group by pa.loan_portfolio_id, convert(p.transaction_at,date) limit 1000;""", con=conSolar)
 
 print('payments MySQl query finished')
 
