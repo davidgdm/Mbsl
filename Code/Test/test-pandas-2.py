@@ -17,7 +17,7 @@ conSolar = sql.connect(user='mobisol_data_warehouse',password='mydLalm8EjimLojOd
 
 print('mysql query stared')
 df_la = pd.read_sql_query("""SELECT *
-FROM loan_accounts  limit 1000;""", con=conSolar)
+FROM loan_accounts  limit 10000;""", con=conSolar)
 
 print('uploading started')
 params = quote("DRIVER={ODBC Driver 17 for SQL Server};SERVER=mbslbiserver.database.windows.net;DATABASE=mbsldwh_dev;UID=Reports;PWD=mbsl1234!")
