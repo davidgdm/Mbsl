@@ -15,7 +15,7 @@ import subprocess
 print('Process has started at:')
 print(datetime.datetime.now())
 
-subprocess.run("""bcp Extr_bcp in "/home/dwh/ETL/mbsl/Code/daily.csv" -S mbslbiserver.database.windows.net -d mbsldwh_dev -U Reports -P mbsl1234! -q -c -t ,""", shell=False, check=True)
+subprocess.run("""bcp Extr_bcp in "/home/dwh/ETL/mbsl/Code/daily.csv" -S mbslbiserver.database.windows.net -d mbsldwh_dev -U Reports -P mbsl1234! -q -c -t ,""", shell=True, check=True)
 print('\n\nProcess has finished at:')
 print(datetime.datetime.now())
 print('-------------------------------')
