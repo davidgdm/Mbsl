@@ -2,13 +2,15 @@ import pandas as pd
 import mysql.connector as sql
 from sqlalchemy import create_engine, text
 from sqlalchemy import delete
-from datetime import datetime
+#from datetime import datetime
+import datetime
 import time
 import urllib
 import pyodbc
 import time
 import pymssql
 import os
+
 
 print('Process has started at:')
 print(datetime.datetime.now())
