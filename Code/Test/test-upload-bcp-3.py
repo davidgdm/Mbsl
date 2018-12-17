@@ -13,7 +13,7 @@ import os
 print('Process has started at:')
 print(datetime.datetime.now())
 
-#os.system("""bcp Extr_bcp in "/home/dwh/ETL/mbsl/Code/daily.csv" -S mbslbiserver.database.windows.net -d mbsldwh_dev -U Reports -P mbsl1234! -q -c -t ,""")
+os.system("""bcp Extr_bcp in "/home/dwh/ETL/mbsl/Code/daily.csv" -S mbslbiserver.database.windows.net -d mbsldwh_dev -U Reports -P mbsl1234! -q -c -t ,""")
 print('\n\nProcess has finished at:')
 print(datetime.datetime.now())
 print('-------------------------------')
