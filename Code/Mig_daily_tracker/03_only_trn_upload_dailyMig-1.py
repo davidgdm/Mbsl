@@ -10,8 +10,10 @@ import time
 import pymssql
 import os
 
+print('Process has started at:')
+print(datetime.datetime.now())
 
-os.system("""bcp Extr_Dailysnapshot in "/home/dwh/ETL/mbsl/Code/daily.csv" -S mbslbiserver.database.windows.net -d mbsldwh_dev -U Reports -P mbsl1234! -q -c -t ,""")
+os.system("""/opt/mssql-tools/bin/bcp Extr_Dailysnapshot in "/home/dwh/ETL/mbsl/Code/daily.csv" -S mbslbiserver.database.windows.net -d mbsldwh_dev -U Reports -P mbsl1234! -q -c -t ,""")
 
 #------------------------TRANSFORMATION---------------------------------
 print('transformation started')
@@ -149,3 +151,7 @@ if object_id('Temp_Migration_agg') is not null
 """
 cursorp.execute(querystring)
 cnxn_prod.commit()
+
+print('\n\nProcess has finished at:')
+print(datetime.datetime.now())
+print('-------------------------------')
