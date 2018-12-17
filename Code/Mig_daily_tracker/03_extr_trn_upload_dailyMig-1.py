@@ -65,7 +65,7 @@ cursor.execute(querystring)
 cnxn_dev.commit()
 print('truncate Extr_Dailysnapshot finished')
 
-os.system("""bcp Extr_Dailysnapshot in "/home/dwh/ETL/mbsl/Code/daily.csv" -S mbslbiserver.database.windows.net -d mbsldwh_dev -U Reports -P mbsl1234! -q -c -t ,""")
+os.system("""/opt/mssql-tools/bin/bcp Extr_Dailysnapshot in "/home/dwh/ETL/mbsl/Code/daily.csv" -S mbslbiserver.database.windows.net -d mbsldwh_dev -U Reports -P mbsl1234! -q -c -t ,""")
 
 #------------------------TRANSFORMATION---------------------------------
 print('transformation started')
