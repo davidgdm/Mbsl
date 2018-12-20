@@ -134,3 +134,4 @@ insert into t_recovery_consolidated select * from trn_recovery; """
 
 cursor.execute(querystring)
 cnxn_dev.commit()
+print('transformation finished')
