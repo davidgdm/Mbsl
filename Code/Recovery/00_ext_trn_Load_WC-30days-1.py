@@ -39,7 +39,7 @@ while True:
     break
 full_df = pd.concat(dfs)
 
-print('payments MySQl query finished')
+print('payments MySQl query finished ')
 
 #df_payments.to_csv('/home/dwh/ETL/mbsl/Code/payments.csv', index=False, chunksize=1000)
 #full_df.to_csv('c:/testETL/payments.csv', index=False,  chunksize=10000, mode='a')
@@ -62,8 +62,9 @@ print('truncate Extr_payments finished')
 os.system("""/opt/mssql-tools/bin/bcp Extr_payments in "/home/dwh/ETL/mbsl/Code/payments.csv" -S mbslbiserver.database.windows.net -d mbsldwh_dev -U Reports -P mbsl1234! -q -c -t ,""")
 
 #######################################################################################################################
+#######################################################################################################################
 
-print('Extraction WC started')
+print('Extraction WC started ')
 #extraction of WC
 df_workcases = pd.read_sql_query("""select left(hubs.hub_name,2) as Country,lwc.id as LWCid,u.name as 'Action_by',c.id as CustomerID, lp.id as LoanPortfolioID, lwc.closed_at, 
 lwc.activity_category_id
